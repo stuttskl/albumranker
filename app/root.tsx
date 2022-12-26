@@ -85,7 +85,7 @@ function Document() {
                     withGlobalStyles
                     withNormalizeCSS
                     emotionCache={emotionCache}
-                    theme={theme === 'dark' ? darkTheme : lightTheme}
+                    theme={data.user.themePref === 'dark' ? darkTheme : lightTheme}
                 >
                     <NotificationsProvider>
                         <AppShell padding='md' header={<Header />}>

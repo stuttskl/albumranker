@@ -1,3 +1,4 @@
+import { ColorScheme } from '@mantine/core';
 import type { Password, User } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
@@ -27,7 +28,8 @@ export async function createUser(email: User['email'], password: string) {
                 create: {
                     hash: hashedPassword
                 }
-            }
+            },
+            themePref: 'light'
         }
     });
 }
@@ -57,4 +59,15 @@ export async function verifyLogin(email: User['email'], password: Password['hash
     const { password: _password, ...userWithoutPassword } = userWithPassword;
 
     return userWithoutPassword;
+}
+
+export async function updateUserThemePreference(id: User['id'], newThemePreference: ColorScheme) {
+    return prisma.user.update({
+        where: {
+            id: id
+        },
+        data: {
+            themePref: newThemePreference
+        }
+    });
 }
